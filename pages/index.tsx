@@ -1,9 +1,25 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import * as React from 'react';
+import { useState } from 'react'
+import { Grid, Paper} from '@mui/material'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
+  const [chairGrids, setChairGrids] = useState(
+    function(){
+      const theArray = new Array<Boolean[]>(10);
+      for (let x = 0; x < 10; x++) {
+        theArray[x] = new Array<Boolean>(10);        
+        for (let y = 0; y < 10; y++) {
+          theArray[x][y] = true;
+        }
+      }
+      return theArray;
+    }()
+  );
+
   return (
     <div className={styles.container}>
       <Head>
@@ -13,44 +29,29 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+        <Grid container justifyContent="center" alignContent="center">
+          <Grid item xs>
+            <Paper>前</Paper>
+          </Grid>
+        {
+          chairGrids.map((column, cindex) =>(
+            <Grid container key={cindex} justifyContent="center" alignContent="center">
+            {
+              column.map((grid, gindex) =>
+                ( 
+                  <Grid item key={gindex} xs>
+                    <Paper style={grid?{background:'#FFFFFF'}:{background:'#000000'}}>{grid.toString()}</Paper>
+                  </Grid>
+                )
+              )
+            }
+            </Grid>
+            ))
+        }
+          <Grid item xs>
+            <Paper>後ろ</Paper>
+          </Grid>
+        </Grid>
       </main>
 
       <footer className={styles.footer}>
