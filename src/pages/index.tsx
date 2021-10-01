@@ -4,7 +4,7 @@ import Image from 'next/image'
 import * as React from 'react';
 import { useState } from 'react'
 import { Grid, Paper} from '@mui/material'
-import styles from '../styles/Home.module.css'
+import styles from '../../styles/Home.module.css'
 
 const Home: NextPage = () => {
   const [chairGrids, setChairGrids] = useState(
