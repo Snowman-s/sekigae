@@ -9,11 +9,11 @@ import styles from '../styles/Home.module.css'
 const Home: NextPage = () => {
   const [chairGrids, setChairGrids] = useState(
     function(){
-      const theArray = new Array<Boolean[]>(10);
+      const theArray = new Array<number[]>(10);
       for (let x = 0; x < 10; x++) {
-        theArray[x] = new Array<Boolean>(10);        
+        theArray[x] = new Array<number>(10);        
         for (let y = 0; y < 10; y++) {
-          theArray[x][y] = true;
+          theArray[x][y] = 10;
         }
       }
       return theArray;
@@ -40,7 +40,7 @@ const Home: NextPage = () => {
               column.map((grid, gindex) =>
                 ( 
                   <Grid item key={gindex} xs>
-                    <Paper style={grid?{background:'#FFFFFF'}:{background:'#000000'}}>{grid.toString()}</Paper>
+                    <Paper style={grid>0?{background:'#FFFFFF'}:{background:'#000000'}}>{grid.toString()}</Paper>
                   </Grid>
                 )
               )
